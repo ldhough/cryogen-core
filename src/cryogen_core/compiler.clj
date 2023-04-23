@@ -245,7 +245,7 @@
                :parsed-group (:parsed-archive-group (get posts 0))
                :posts        (map #(select-keys % [:title :uri :date]) posts)}))
        (sort-by :parsed-group)
-       reverse))
+       #_reverse))
 
 (defn group-for-author
   "Groups the posts by author. If no post author if found defaults `default-author`."
