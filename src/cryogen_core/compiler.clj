@@ -219,7 +219,8 @@
              (find-pages config mu)
              (filter incremental-compile-filter)
              (map #(parse-page % config mu)))))
-       (sort-by :page-index)))
+       (sort-by :page-index)
+       reverse))
 
 (defn tag-post
   "Adds the uri and title of a post to the list of posts under each of its tags"
