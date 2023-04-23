@@ -238,15 +238,18 @@
 (defn group-for-archive
   "Groups the posts by month and year for archive sorting"
   [posts]
-  (->> posts
-       (map #(select-keys % [:title :uri :date :formatted-archive-group :parsed-archive-group]))
-       (group-by :formatted-archive-group)
-       (map (fn [[group posts]]
-              {:group        group
-               :parsed-group (:parsed-archive-group (get posts 0))
-               :posts        (map #(select-keys % [:title :uri :date]) posts)}))
-       (sort-by :parsed-group)
-       #_reverse))
+  (let [result (->> posts
+             (map #(select-keys % [:title :uri :date :formatted-archive-group :parsed-archive-group]))
+             (group-by :formatted-archive-group)
+             (map (fn [[group posts]]
+                    {:group        group
+                     :parsed-group (:parsed-archive-group (get posts 0))
+                     :posts        (map #(select-keys % [:title :uri :date]) posts)}))
+             (sort-by :parsed-group)
+             #_reverse)]
+    (println "RESULTS OF group-for-archive:")
+    (clojure.pprint/pprint result)
+    result))
 
 (defn group-for-author
   "Groups the posts by author. If no post author if found defaults `default-author`."
