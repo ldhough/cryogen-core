@@ -205,7 +205,7 @@
              (pmap #(parse-post % config mu))
              (remove #(= (:draft? %) true)))))
        (sort-by :date)
-       reverse
+       #_reverse
        (drop-while #(and (:hide-future-posts? config) (.after ^Date (:date %) (Date.))))))
 
 (defn read-pages
